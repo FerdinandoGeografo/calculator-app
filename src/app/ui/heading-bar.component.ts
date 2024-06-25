@@ -21,6 +21,7 @@ import { ThemeSliderComponent } from './theme-slider.component';
         padding-left: 7px;
         color: var(--text-color);
         font-size: inherit;
+        letter-spacing: -0.53px;
         align-self: end;
         transition: color .4s;
       }

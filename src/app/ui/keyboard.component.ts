@@ -15,6 +15,8 @@ import { KeyComponent } from './key.component';
     </ul>
   `,
   styles: `
+    @use '../../../public/scss/_mixins.scss' as mixins;
+
     .keyboard {
       list-style-type: none;
       padding: 3.2rem 3rem;
@@ -31,6 +33,11 @@ import { KeyComponent } from './key.component';
 
       li:nth-last-child(-n+2) {
         grid-column-end: span 2;
+      }
+
+      @include mixins.respond(phone) {
+        padding: 2.4rem;
+        gap: 1.3rem;
       }
     }
   `,

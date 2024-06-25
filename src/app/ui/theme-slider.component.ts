@@ -1,5 +1,4 @@
-import { Component, inject } from '@angular/core';
-import { GlobalStateService } from '../data/global-state.service';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-theme-slider',
@@ -32,13 +31,14 @@ import { GlobalStateService } from '../data/global-state.service';
           list="values"
           min="1"
           max="3"
-          [value]="store.theme()"
-          (change)="store.changeTheme(+slider.value)"
+          value="1"
         />
       </div>
     </div>
   `,
   styles: `
+    @use '../../../public/scss/_mixins.scss' as mixins;
+
     .theme-slider {
       display: flex;
       gap: 2.6rem;
@@ -50,6 +50,10 @@ import { GlobalStateService } from '../data/global-state.service';
         text-transform: uppercase;
         letter-spacing: 1px;
         transition: color .4s;
+
+        @include mixins.respond(phone) {
+          margin-top: 2.6rem;
+        }
       }
 
       &__box {
@@ -107,6 +111,4 @@ import { GlobalStateService } from '../data/global-state.service';
     }
   `,
 })
-export class ThemeSliderComponent {
-  protected store = inject(GlobalStateService);
-}
+export class ThemeSliderComponent {}

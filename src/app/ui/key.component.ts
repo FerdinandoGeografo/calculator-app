@@ -11,17 +11,17 @@ import { Component, computed, input } from '@angular/core';
     </button>
   `,
   styles: `
+    @use '../../../public/scss/_mixins.scss' as mixins;
+
     .key {
       width: 100%;
       height: 100%;
-
       cursor: pointer;
       border: 0 none;
       border-radius: 1rem;
       outline: 0 none;
       font-family: inherit;
       font-weight: inherit;
-
       transition: all .4s;
 
       &:active {
@@ -39,8 +39,17 @@ import { Component, computed, input } from '@angular/core';
         }
       }
 
-      &--secondary {
+      &--secondary, &--tertiary {
         font-size: 2.8rem;
+        letter-spacing: -0.47px;
+
+        @include mixins.respond(phone) {
+          font-size: 2rem;
+          letter-spacing: -0.33px;
+        }
+      }
+
+      &--secondary {
         background: var(--secondary-key-bg);
         color: var(--secondary-key-text);
         box-shadow: var(--secondary-key-shadow);
@@ -51,7 +60,6 @@ import { Component, computed, input } from '@angular/core';
       }
 
       &--tertiary {
-        font-size: 2.8rem;
         background: var(--tertiary-key-bg);
         color: var(--tertiary-key-text);
         box-shadow: var(--tertiary-key-shadow);

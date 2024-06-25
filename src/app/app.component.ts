@@ -2,7 +2,7 @@ import { Component, inject } from '@angular/core';
 import { HeadingBarComponent } from './ui/heading-bar.component';
 import { InputBarComponent } from './ui/input-bar.component';
 import { KeyboardComponent } from './ui/keyboard.component';
-import { GlobalStateService } from './data/global-state.service';
+import { DataService } from './data/data.service';
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -39,5 +39,5 @@ import { GlobalStateService } from './data/global-state.service';
   `,
 })
 export class AppComponent {
-  protected store = inject(GlobalStateService);
+  protected store = inject(DataService);
 }
