@@ -1,0 +1,31 @@
+/*
+* RESET
+*/
+*,
+*:after,
+*:before {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+
+html {
+  font-size: 10px;
+}
+
+body {
+  box-sizing: border-box;
+  min-height: 100vh;
+
+  display: grid;
+  place-items: center;
+
+  background: var(--bg-surface);
+  transition: all .4s;
+}
+
+::-webkit-scrollbar {}
+
+::-webkit-scrollbar-track {}
+
+::-webkit-scrollbar-thumb {}

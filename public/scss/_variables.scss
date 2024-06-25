@@ -1,0 +1,70 @@
+:root {
+  --ff-main: "League Spartan", sans-serif;
+
+  .primary {
+    --bg-surface: #434a59;
+    --bg-input: #181f33;
+    --bg-board: #242D44;
+    --text-color: #fff;
+
+    --primary-key-bg: #eae3dc;
+    --primary-key-bg-hover: #fff;
+    --primary-key-text: #434a59;
+    --primary-key-shadow: inset 0 -4px 0 0 #b3a497;
+
+    --secondary-key-bg: #647198;
+    --secondary-key-bg-hover: #a2b2e1;
+    --secondary-key-text: #fff;
+    --secondary-key-shadow: inset 0 -4px 0 0 #414e73;
+
+    --tertiary-key-bg: #d03f2f;
+    --tertiary-key-bg-hover: #f96b5b;
+    --tertiary-key-text: #fff;
+    --tertiary-key-shadow: inset 0 -4px 0 0 #93261a;
+  }
+
+  .secondary {
+    --bg-surface: #e5e4e1;
+    --bg-input: #eee;
+    --bg-board: #d2cdcd;
+    --text-color: #36362c;
+
+    --primary-key-bg: #e5e4e1;
+    --primary-key-bg-hover: #fff;
+    --primary-key-text: #36362c;
+    --primary-key-shadow: inset 0 -4px 0 0 #a79e91;
+
+    --secondary-key-bg: #378187;
+    --secondary-key-bg-hover: #62b5bc;
+    --secondary-key-text: #fff;
+    --secondary-key-shadow: inset 0 -4px 0 0 #414e73;
+
+    --tertiary-key-bg: #c85402;
+    --tertiary-key-bg-hover: #ff8a38;
+    --tertiary-key-text: #fff;
+    --tertiary-key-shadow: inset 0 -4px 0 0 #873901;
+  }
+
+  .tertiary {
+    --bg-surface: #17062a;
+    --bg-input: #1e0936;
+    --bg-board: #1e0936;
+    --text-color: #ffe53d;
+
+    --primary-key-bg: #331c4d;
+    --primary-key-bg-hover: #6c34ac;
+    --primary-key-text: #ffe53d;
+    --primary-key-shadow: inset 0 -4px 0 0 #881c9e;
+
+    --secondary-key-bg: #56077c;
+    --secondary-key-bg-hover: #8631af;
+    --secondary-key-text: #fff;
+    --secondary-key-shadow: inset 0 -4px 0 0 #be15f4;
+
+    --tertiary-key-bg: #00ded0;
+    --tertiary-key-bg-hover: #93fff8;
+    --tertiary-key-text: #1a2327;
+    --tertiary-key-shadow: inset 0 -4px 0 0 #6cf9f1;
+  }
+
+}

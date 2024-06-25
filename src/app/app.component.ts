@@ -1,17 +1,43 @@
-import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-
+import { Component, inject } from '@angular/core';
+import { HeadingBarComponent } from './ui/heading-bar.component';
+import { InputBarComponent } from './ui/input-bar.component';
+import { KeyboardComponent } from './ui/keyboard.component';
+import { GlobalStateService } from './data/global-state.service';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet],
+  imports: [HeadingBarComponent, InputBarComponent, KeyboardComponent],
   template: `
-    <h1>Welcome to {{title}}!</h1>
+    <main class="main">
+      <app-heading-bar />
 
-    <router-outlet />
+      <div class="main__content">
+        <app-input-bar />
+
+        <app-keyboard />
+      </div>
+    </main>
   `,
-  styles: [],
+  styles: `
+    :host { width: 100%; }
+
+    .main {
+      max-width: 54rem;
+      width: 100%;
+      margin: 0 auto;
+
+      display: flex;
+      flex-direction: column;
+      gap: 3.2rem;
+
+      &__content {
+        display: flex;
+        flex-direction: column;
+        gap: 2.4rem;
+      }
+    }
+  `,
 })
 export class AppComponent {
-  title = 'calculator-app';
+  protected store = inject(GlobalStateService);
 }
