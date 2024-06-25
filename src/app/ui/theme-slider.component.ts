@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, computed, inject } from '@angular/core';
+import { DataService } from '../data/data.service';
 
 @Component({
   selector: 'app-theme-slider',
@@ -10,28 +11,20 @@ import { Component } from '@angular/core';
 
       <div class="theme-slider__box">
         <datalist class="theme-slider__markers" id="values">
-          <option class="theme-slider__mark" value="primary" label="1"></option>
-          <option
-            class="theme-slider__mark"
-            value="secondary"
-            label="2"
-          ></option>
-          <option
-            class="theme-slider__mark"
-            value="tertiary"
-            label="3"
-          ></option>
+          <option class="theme-slider__mark" value="1" label="1"></option>
+          <option class="theme-slider__mark" value="2" label="2"></option>
+          <option class="theme-slider__mark" value="3" label="3"></option>
         </datalist>
 
         <input
-          #slider
           class="theme-slider__input"
           type="range"
           id="theme"
           list="values"
           min="1"
           max="3"
-          value="1"
+          [value]="this.themeOpt()"
+          (input)="changeTheme($event)"
         />
       </div>
     </div>
@@ -111,4 +104,12 @@ import { Component } from '@angular/core';
     }
   `,
 })
-export class ThemeSliderComponent {}
+export class ThemeSliderComponent {
+  protected data = inject(DataService);
+
+  themeOpt = computed(() => this.data.themeIndex() + 1);
+
+  changeTheme(e: Event) {
+    this.data.changeTheme(+(e.target as HTMLInputElement).value - 1);
+  }
+}

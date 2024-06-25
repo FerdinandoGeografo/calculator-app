@@ -34,7 +34,7 @@ import { Component, computed, input } from '@angular/core';
         color: var(--primary-key-text);
         box-shadow: var(--primary-key-shadow);
 
-        &:hover {
+        &:hover, &:focus {
           background: var(--primary-key-bg-hover);
         }
       }
@@ -54,7 +54,7 @@ import { Component, computed, input } from '@angular/core';
         color: var(--secondary-key-text);
         box-shadow: var(--secondary-key-shadow);
 
-        &:hover {
+        &:hover, &:focus {
           background: var(--secondary-key-bg-hover);
         }
       }
@@ -64,7 +64,7 @@ import { Component, computed, input } from '@angular/core';
         color: var(--tertiary-key-text);
         box-shadow: var(--tertiary-key-shadow);
 
-        &:hover {
+        &:hover, &:focus {
           background: var(--tertiary-key-bg-hover);
         }
       }

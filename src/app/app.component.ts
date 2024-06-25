@@ -19,7 +19,20 @@ import { DataService } from './data/data.service';
     </main>
   `,
   styles: `
-    :host { width: 100%; }
+    @use "../../public/scss/_mixins.scss" as mixins;
+
+    :host {
+      min-height: 100vh;
+      padding-block: 3rem;
+      display: grid;
+      place-items: center;
+      background: var(--bg-surface);
+      transition: all .4s;
+
+      @include mixins.respond(phone) {
+        padding-inline: 2.4rem;
+      }
+    }
 
     .main {
       max-width: 54rem;
@@ -37,6 +50,9 @@ import { DataService } from './data/data.service';
       }
     }
   `,
+  host: {
+    '[class]': 'store.theme()',
+  },
 })
 export class AppComponent {
   protected store = inject(DataService);

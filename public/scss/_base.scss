@@ -12,15 +12,4 @@ html {
 
 body {
   box-sizing: border-box;
-  min-height: 100vh;
-
-  display: grid;
-  place-items: center;
-
-  background: var(--bg-surface);
-  transition: all .4s;
-
-  @include mixins.respond(phone) {
-    padding-inline: 2.4rem;
-  }
 }
