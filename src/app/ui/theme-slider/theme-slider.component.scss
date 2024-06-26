@@ -1,0 +1,72 @@
+@use '../../../../public/scss/_mixins.scss' as mixins;
+
+.theme-slider {
+  display: flex;
+  gap: 2.6rem;
+
+  &__label {
+    margin-top: 2.4rem;
+    color: var(--text-color);
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: color .4s;
+
+    @include mixins.respond(phone) {
+      margin-top: 2.6rem;
+    }
+  }
+
+  &__box {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  &__input {
+    -webkit-appearance: none;
+    appearance: none;
+
+    max-width: 7.1rem;
+    height: 2.6rem;
+    padding-inline: 5px;
+    border-radius: 1.3rem;
+
+    background: var(--bg-board);
+    outline: none;
+    transition: all .4s;
+
+    &::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+
+      width: 1.6rem;
+      height: 1.6rem;
+      background: var(--tertiary-key-bg);
+      border-radius: 50%;
+      transition: all .4s;
+      cursor: pointer;
+
+      &:hover {
+        background: var(--tertiary-key-bg-hover);
+      }
+    }
+  }
+
+  &__markers {
+    max-height: 1.1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-inline: 6px;
+    color: var(--text-color);
+    transition: color .4s;
+  }
+
+  &__mark {
+    width: 1.2rem;
+    text-align: center;
+    font-size: 1.2rem;
+    font-weight: inherit;
+  }
+}
