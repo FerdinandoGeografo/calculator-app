@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, output } from '@angular/core';
 import { KeyComponent } from '../key/key.component';
+import { Key, KeyConfig, KEYS } from '../../models/key.model';
 
 @Component({
   selector: 'app-keyboard',
@@ -9,7 +10,12 @@ import { KeyComponent } from '../key/key.component';
     <ul class="keyboard">
       @for (key of keys; track $index) {
       <li>
-        <app-key [key]="key.label" [severity]="key.severity || 'primary'" />
+        <app-key
+          [key]="key.key"
+          [label]="key.label"
+          [severity]="key.severity"
+          (onKeyClick)="key.onKeyClick()"
+        />
       </li>
       }
     </ul>
@@ -17,66 +23,24 @@ import { KeyComponent } from '../key/key.component';
   styleUrl: './keyboard.component.scss',
 })
 export class KeyboardComponent {
-  keys: {
-    label: string;
-    severity?: 'primary' | 'secondary' | 'tertiary';
-  }[] = [
-    {
-      label: '7',
-    },
-    {
-      label: '8',
-    },
-    {
-      label: '9',
-    },
-    {
-      label: 'DEL',
-      severity: 'secondary',
-    },
-    {
-      label: '4',
-    },
-    {
-      label: '5',
-    },
-    {
-      label: '6',
-    },
-    {
-      label: '+',
-    },
-    {
-      label: '1',
-    },
-    {
-      label: '2',
-    },
-    {
-      label: '3',
-    },
-    {
-      label: '-',
-    },
-    {
-      label: '.',
-    },
-    {
-      label: '0',
-    },
-    {
-      label: '/',
-    },
-    {
-      label: 'x',
-    },
-    {
-      label: 'RESET',
-      severity: 'secondary',
-    },
-    {
-      label: '=',
-      severity: 'tertiary',
-    },
-  ];
+  keys: KeyConfig[] = KEYS.map((el) => ({
+    key: el,
+    label:
+      el === 'Backspace'
+        ? 'DEL'
+        : el === 'Reset'
+        ? 'RESET'
+        : el === '*'
+        ? 'x'
+        : el,
+    severity:
+      el === '='
+        ? 'tertiary'
+        : el === 'Backspace' || el === 'Reset'
+        ? 'secondary'
+        : 'primary',
+    onKeyClick: () => this.onKeyClick.emit(el),
+  }));
+
+  onKeyClick = output<Key>();
 }

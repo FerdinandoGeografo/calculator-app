@@ -11,7 +11,8 @@
   font-weight: inherit;
   transition: all .4s;
 
-  &:active {
+  &:active,
+  &.key--active {
     box-shadow: none;
   }
 

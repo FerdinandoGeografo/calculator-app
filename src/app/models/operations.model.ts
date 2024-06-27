@@ -6,4 +6,4 @@ export const OPERATIONS: Record<Operator, EvalFunction> = {
   '-': (a, b) => a - b,
   '*': (a, b) => a * b,
   '/': (a, b) => a / b,
-};
+} as const;

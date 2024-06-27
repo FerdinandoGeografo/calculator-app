@@ -21,9 +21,9 @@ import { StoreService } from './data/store.service';
       </div>
 
       <div class="calculator__content">
-        <app-input-bar />
+        <app-input-bar [value]="store.displayed()" />
 
-        <app-keyboard />
+        <app-keyboard (onKeyClick)="store.handleKeyClick($event)" />
       </div>
     </main>
   `,
