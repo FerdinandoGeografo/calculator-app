@@ -4,4 +4,7 @@ body {
   font-weight: 700;
 }
 
-::selection {}
+::selection {
+  background: var(--text-color);
+  color: var(--bg-result);
+}
