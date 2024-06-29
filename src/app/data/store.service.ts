@@ -11,8 +11,8 @@ export class StoreService {
     ...initialState,
     ...this.#load(),
     themeIndex: window.matchMedia('(prefers-color-scheme: dark)').matches
-      ? 1
-      : 0,
+      ? 0
+      : 1,
   });
 
   themeIndex = computed(() => this.#store().themeIndex);
