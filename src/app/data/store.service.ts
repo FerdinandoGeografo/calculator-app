@@ -17,7 +17,10 @@ export class StoreService {
 
   themeIndex = computed(() => this.#store().themeIndex);
   theme = computed(() => THEMES[this.themeIndex()]);
-  #displayedNum = computed(() => parseFloat(this.#store().displayed));
+  #displayedNum = computed(() => {
+    const val = parseFloat(this.#store().displayed);
+    return isNaN(val) ? 0.0 : val;
+  });
   #operandNum = computed(() => parseFloat(this.#store().operand));
   #operator = computed(() => this.#store().operator);
   prettyDisplayed = computed(() =>
@@ -102,7 +105,10 @@ export class StoreService {
 
     this.#store.update((state) => ({
       ...state,
-      displayed: (result === 'Infinity' ? 0.0 : parseFloat(result)).toString(),
+      displayed: (result === 'Infinity' || result === 'NaN'
+        ? 0.0
+        : parseFloat(result)
+      ).toString(),
       operand: '0',
       operator: undefined,
     }));
