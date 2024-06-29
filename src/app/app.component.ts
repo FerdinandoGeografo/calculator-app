@@ -1,14 +1,14 @@
 import { Component, inject } from '@angular/core';
 
 import { ThemeSliderComponent } from './ui/theme-slider/theme-slider.component';
-import { InputBarComponent } from './ui/input-bar/input-bar.component';
+import { ResultBarComponent } from './ui/result-bar/result-bar.component';
 import { KeyboardComponent } from './ui/keyboard/keyboard.component';
 
 import { StoreService } from './data/store.service';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [ThemeSliderComponent, InputBarComponent, KeyboardComponent],
+  imports: [ThemeSliderComponent, ResultBarComponent, KeyboardComponent],
   template: `
     <main class="calculator">
       <div class="calculator__heading">
@@ -21,7 +21,7 @@ import { StoreService } from './data/store.service';
       </div>
 
       <div class="calculator__content">
-        <app-input-bar [value]="store.displayed()" />
+        <app-result-bar [displayed]="store.displayed()" />
 
         <app-keyboard (onKeyClick)="store.handleKeyClick($event)" />
       </div>

@@ -7,14 +7,25 @@ import { Key } from '../models/key.model';
   providedIn: 'root',
 })
 export class StoreService {
-  #store = signal<AppState>(initialState);
-  #logEffect = effect(() => console.log('State changed:\t', this.#store()));
+  #store = signal<AppState>({
+    ...initialState,
+    ...JSON.parse(localStorage.getItem('state') || '{}'),
+    themeIndex: window.matchMedia('(prefers-color-scheme: dark)').matches
+      ? 1
+      : 0,
+  });
 
   themeIndex = computed(() => this.#store().themeIndex);
   theme = computed(() => THEMES[this.themeIndex()]);
-  displayed = computed(() => Number.parseFloat(this.#store().displayed));
-  operand = computed(() => this.#store().operand);
-  #operatorSelected = computed(() => !!this.#store().operator);
+  displayed = computed(() =>
+    Number.parseFloat(this.#store().displayed).toLocaleString()
+  );
+
+  constructor() {
+    effect(() => {
+      console.log('State changed:\t', this.#store());
+    });
+  }
 
   changeTheme(index: number) {
     this.#store.update((state) => ({ ...state, themeIndex: index }));
@@ -34,6 +45,9 @@ export class StoreService {
       case '/':
         this.#setOperator(key as Operator);
         break;
+      case '.':
+        this.#floatify();
+        break;
       case '=':
         this.#eval();
         break;
@@ -44,45 +58,56 @@ export class StoreService {
 
   #reset() {
     this.#store.update((state) => ({
-      ...state,
       ...initialState,
+      themeIndex: state.themeIndex,
     }));
   }
 
   #delete() {
     this.#store.update((state) => ({
       ...state,
-      displayed: !this.#operatorSelected()
-        ? state.displayed.slice(0, -1)
-        : state.operand,
-      operand: this.#operatorSelected() ? state.displayed : state.operand,
-      operator: this.#operatorSelected() ? undefined : state.operator,
+      displayed: state.displayed.slice(0, -1) || '0',
     }));
   }
 
   #setOperator(operator: Operator) {
-    if (operator === this.#store().operator) return;
+    if (!this.#store().operator) {
+      this.#store.update((state) => ({
+        ...state,
+        displayed: '0',
+        operand: state.displayed,
+      }));
+    }
 
     this.#store.update((state) => ({
       ...state,
-      displayed: state.operand,
-      operand: state.displayed,
       operator,
     }));
   }
 
+  #floatify() {
+    this.#store.update((state) => ({
+      ...state,
+      displayed: state.displayed.includes('.')
+        ? state.displayed
+        : state.displayed + '.',
+    }));
+  }
+
   #eval() {
-    if (!this.#operatorSelected()) return;
+    if (!this.#store().operator) return;
 
     this.#store.update((state) => ({
       ...state,
       displayed: OPERATIONS[state.operator!](
         Number.parseFloat(state.operand),
         Number.parseFloat(state.displayed)
-      ).toString(),
-      operand: '',
+      ).toLocaleString(),
+      operand: '0',
       operator: undefined,
     }));
+
+    this.#save();
   }
 
   #appendKey(key: Key) {
@@ -90,6 +115,11 @@ export class StoreService {
       ...state,
       displayed: state.displayed + key,
     }));
+  }
+
+  #save() {
+    const state = JSON.stringify(this.#store());
+    localStorage.setItem('state', state);
   }
 }
 
@@ -102,6 +132,7 @@ type AppState = {
 
 const initialState: AppState = {
   themeIndex: 0,
-  displayed: '',
-  operand: '',
+  displayed: '0',
+  operand: '0',
+  operator: undefined,
 };

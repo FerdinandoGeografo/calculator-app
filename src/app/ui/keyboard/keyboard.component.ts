@@ -1,6 +1,6 @@
 import { Component, output } from '@angular/core';
 import { KeyComponent } from '../key/key.component';
-import { Key, KeyConfig, KEYS } from '../../models/key.model';
+import { Key, KEY_CONFIGS } from '../../models/key.model';
 
 @Component({
   selector: 'app-keyboard',
@@ -14,7 +14,7 @@ import { Key, KeyConfig, KEYS } from '../../models/key.model';
           [key]="key.key"
           [label]="key.label"
           [severity]="key.severity"
-          (onKeyClick)="key.onKeyClick()"
+          (onKeyClick)="onKeyClick.emit(key.key)"
         />
       </li>
       }
@@ -23,24 +23,6 @@ import { Key, KeyConfig, KEYS } from '../../models/key.model';
   styleUrl: './keyboard.component.scss',
 })
 export class KeyboardComponent {
-  keys: KeyConfig[] = KEYS.map((el) => ({
-    key: el,
-    label:
-      el === 'Backspace'
-        ? 'DEL'
-        : el === 'Reset'
-        ? 'RESET'
-        : el === '*'
-        ? 'x'
-        : el,
-    severity:
-      el === '='
-        ? 'tertiary'
-        : el === 'Backspace' || el === 'Reset'
-        ? 'secondary'
-        : 'primary',
-    onKeyClick: () => this.onKeyClick.emit(el),
-  }));
-
+  keys = KEY_CONFIGS;
   onKeyClick = output<Key>();
 }

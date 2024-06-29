@@ -1,4 +1,4 @@
-export const KEYS = [
+const KEYS = [
   '7',
   '8',
   '9',
@@ -25,5 +25,22 @@ export type KeyConfig = {
   key: Key;
   label: string;
   severity: 'primary' | 'secondary' | 'tertiary';
-  onKeyClick: () => void;
 };
+
+export const KEY_CONFIGS: KeyConfig[] = KEYS.map((el) => ({
+  key: el,
+  label:
+    el === 'Backspace'
+      ? 'DEL'
+      : el === 'Reset'
+      ? 'RESET'
+      : el === '*'
+      ? 'x'
+      : el,
+  severity:
+    el === '='
+      ? 'tertiary'
+      : el === 'Backspace' || el === 'Reset'
+      ? 'secondary'
+      : 'primary',
+}));
