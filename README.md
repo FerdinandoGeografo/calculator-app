@@ -56,6 +56,8 @@ All the actions that modify the state are managed within the service that expose
 
 Finally I also managed the bonus point by savig the state of the application in the local storage at each evaulation.
 
+I opted to set a limit of maximum 10 decimal digits when formatting the displayed number. So the user can enter only 10 numbers after the decimal point at most.
+
 ## Author
 
 - Frontend Mentor - [@FerdinandoGeografo](https://www.frontendmentor.io/profile/FerdinandoGeografo)

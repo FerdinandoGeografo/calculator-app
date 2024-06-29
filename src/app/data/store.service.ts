@@ -27,12 +27,6 @@ export class StoreService {
     })
   );
 
-  constructor() {
-    effect(() => {
-      console.log('State changed:\t', this.#store());
-    });
-  }
-
   changeTheme(index: number) {
     this.#store.update((state) => ({ ...state, themeIndex: index }));
   }
