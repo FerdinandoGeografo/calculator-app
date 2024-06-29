@@ -9,17 +9,15 @@ import { Component, input, output } from '@angular/core';
       <label class="theme-slider__label" for="theme"> Theme </label>
 
       <div class="theme-slider__box">
-        <datalist class="theme-slider__markers" id="values">
-          <option class="theme-slider__mark" value="0" label="1"></option>
-          <option class="theme-slider__mark" value="1" label="2"></option>
-          <option class="theme-slider__mark" value="2" label="3"></option>
-        </datalist>
+        <ul class="theme-slider__markers">
+          <li class="theme-slider__mark">1</li>
+          <li class="theme-slider__mark">2</li>
+          <li class="theme-slider__mark">3</li>
+        </ul>
 
         <input
           class="theme-slider__input"
           type="range"
-          id="theme"
-          list="values"
           min="0"
           max="2"
           [value]="theme()"

@@ -18,16 +18,17 @@
   }
 
   &__box {
+    height: 4.4rem;
     display: flex;
     flex-direction: column;
-    gap: 5px;
+    justify-content: space-between;
   }
 
   &__input {
     -webkit-appearance: none;
     -moz-appearance: none;
+    -ms-appearance: none;
     appearance: none;
-
     max-width: 7.1rem;
     height: 2.6rem;
     padding-inline: 5px;
@@ -36,59 +37,56 @@
     background: var(--bg-board);
     outline: none;
     transition: all .4s;
-  }
 
-  &__input::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    appearance: none;
+    &::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      -ms-appearance: none;
+      appearance: none;
+      width: 1.6rem;
+      height: 1.6rem;
+      background: var(--tertiary-key-bg);
+      border-radius: 50%;
+      transition: all .4s;
+      cursor: pointer;
 
-    width: 1.6rem;
-    height: 1.6rem;
-    background: var(--tertiary-key-bg);
-    border-radius: 50%;
-    transition: all .4s;
-    cursor: pointer;
-  }
+      &:hover {
+        background: var(--tertiary-key-bg-hover);
+      }
+    }
 
-  &__input::-webkit-slider-thumb:hover {
-    background: var(--tertiary-key-bg-hover);
-  }
+    &::-moz-range-thumb {
+      -moz-appearance: none;
+      appearance: none;
+      width: 1.6rem;
+      height: 1.6rem;
+      background: var(--tertiary-key-bg);
+      border-radius: 50%;
+      transition: all .4s;
+      cursor: pointer;
 
-  &__input::-moz-range-thumb {
-    -moz-appearance: none;
-    appearance: none;
+      &:hover {
+        background: var(--tertiary-key-bg-hover);
+      }
+    }
 
-    width: 1.6rem;
-    height: 1.6rem;
-    background: var(--tertiary-key-bg);
-    border-radius: 50%;
-    border: 0 none;
-    transition: all .4s;
-    cursor: pointer;
-  }
+    &::-ms-thumb {
+      -ms-appearance: none;
+      appearance: none;
+      width: 1.6rem;
+      height: 1.6rem;
+      background: var(--tertiary-key-bg);
+      border-radius: 50%;
+      transition: all .4s;
+      cursor: pointer;
 
-  &__input::-moz-range-thumb:hover {
-    background: var(--tertiary-key-bg-hover);
-  }
-
-  &__input::-ms-thumb {
-    -ms-appearance: none;
-    appearance: none;
-
-    width: 1.6rem;
-    height: 1.6rem;
-    background: var(--tertiary-key-bg);
-    border-radius: 50%;
-    transition: all .4s;
-    cursor: pointer;
-  }
-
-  &__input::-ms-thumb:hover {
-    background: var(--tertiary-key-bg-hover);
+      &:hover {
+        background: var(--tertiary-key-bg-hover);
+      }
+    }
   }
 
   &__markers {
-    max-height: 1.1rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
