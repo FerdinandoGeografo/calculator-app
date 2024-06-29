@@ -9,7 +9,7 @@ import { Key } from '../models/key.model';
 export class StoreService {
   #store = signal<AppState>({
     ...initialState,
-    ...JSON.parse(localStorage.getItem('state') || '{}'),
+    ...this.#load(),
     themeIndex: window.matchMedia('(prefers-color-scheme: dark)').matches
       ? 1
       : 0,
@@ -17,8 +17,14 @@ export class StoreService {
 
   themeIndex = computed(() => this.#store().themeIndex);
   theme = computed(() => THEMES[this.themeIndex()]);
-  displayed = computed(() =>
-    Number.parseFloat(this.#store().displayed).toLocaleString()
+  #displayedNum = computed(() => parseFloat(this.#store().displayed));
+  #operandNum = computed(() => parseFloat(this.#store().operand));
+  #operator = computed(() => this.#store().operator);
+  prettyDisplayed = computed(() =>
+    this.#displayedNum().toLocaleString('en-EN', {
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 10,
+    })
   );
 
   constructor() {
@@ -71,16 +77,14 @@ export class StoreService {
   }
 
   #setOperator(operator: Operator) {
-    if (!this.#store().operator) {
-      this.#store.update((state) => ({
-        ...state,
-        displayed: '0',
-        operand: state.displayed,
-      }));
+    if (this.#operator()) {
+      this.#eval();
     }
 
     this.#store.update((state) => ({
       ...state,
+      operand: state.displayed,
+      displayed: '0',
       operator,
     }));
   }
@@ -95,14 +99,16 @@ export class StoreService {
   }
 
   #eval() {
-    if (!this.#store().operator) return;
+    if (!this.#operator()) return;
+
+    const result = OPERATIONS[this.#operator()!](
+      this.#operandNum(),
+      this.#displayedNum()
+    ).toFixed(10);
 
     this.#store.update((state) => ({
       ...state,
-      displayed: OPERATIONS[state.operator!](
-        Number.parseFloat(state.operand),
-        Number.parseFloat(state.displayed)
-      ).toLocaleString(),
+      displayed: (result === 'Infinity' ? 0.0 : parseFloat(result)).toString(),
       operand: '0',
       operator: undefined,
     }));
@@ -111,15 +117,26 @@ export class StoreService {
   }
 
   #appendKey(key: Key) {
+    if (
+      this.#store().displayed.includes('.') &&
+      this.#store().displayed.split('.')[1].length >= 10
+    )
+      return;
+
     this.#store.update((state) => ({
       ...state,
-      displayed: state.displayed + key,
+      displayed: state.displayed === '0' ? key : state.displayed + key,
     }));
   }
 
   #save() {
     const state = JSON.stringify(this.#store());
     localStorage.setItem('state', state);
+  }
+
+  #load() {
+    const state = localStorage.getItem('state');
+    return state ? (JSON.parse(state) as AppState) : {};
   }
 }
 

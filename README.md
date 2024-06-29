@@ -43,28 +43,18 @@ Users should be able to:
 - CSS Grid
 - Desktop-first workflow
 - [Angular](https://angular.dev/) - JS Framework
+- [TypeScript](https://www.typescriptlang.org/) - Super set of Javascript
+- [RxJS](https://rxjs.dev/) - Js library for reactive approach
 
 ### What I learned
 
-Use this section to recap over some of your major learnings while working through this project. Writing these out and providing code samples of areas you want to highlight is a great way to reinforce your own knowledge.
+This Frontend Mentor Challenge consists of developing a Calculator app allowing users to switch between three themes. There are no other specific requests but I chose to also manage decimal operations with floats.
 
-To see how you can add code snippets, see below:
+The core point of this project was the management of the logic, even if I didn't use NgRX I let myself be guided by its core concepts to manage the state of the application within a service that exposes only a signal related to the result to be shown, that corresponds also to the first operand of the operations.
 
-```html
-<h1>Some HTML code I'm proud of</h1>
-```
+All the actions that modify the state are managed within the service that exposes a single action to the smart app component and this favors a decoupling between the application logic and the access of the data and the rendering in dumb components. The service acts like a Facade pattern that expose the state and handle events by actions dispatched from components by UI events.
 
-```css
-.proud-of-this-css {
-  color: papayawhip;
-}
-```
-
-```js
-const proudOfThisFunc = () => {
-  console.log("🎉");
-};
-```
+Finally I also managed the bonus point by savig the state of the application in the local storage at each evaulation.
 
 ## Author
 

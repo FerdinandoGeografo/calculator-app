@@ -8,12 +8,7 @@ import { filter, fromEvent, map, tap } from 'rxjs';
   standalone: true,
   imports: [NgClass],
   template: `
-    <button
-      class="key"
-      [ngClass]="keyClass()"
-      (click)="onKeyClick.emit(key())"
-      [type]="key() === '=' ? 'submit' : ''"
-    >
+    <button class="key" [ngClass]="keyClass()" (click)="onKeyClick.emit(key())">
       {{ label() }}
     </button>
   `,
