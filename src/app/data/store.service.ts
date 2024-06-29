@@ -149,7 +149,7 @@ type AppState = {
 
 const initialState: AppState = {
   themeIndex: 0,
-  displayed: '399981',
+  displayed: '0',
   operand: '0',
   operator: undefined,
 };
